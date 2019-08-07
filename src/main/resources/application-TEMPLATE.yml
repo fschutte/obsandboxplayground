@@ -1,0 +1,17 @@
+logging.level:
+  root: INFO
+  org.springframework.web: TRACE
+  nl.brachio: TRACE
+
+obapi:
+  keypath: <path to key.pem for TLS>
+  certpath: <path to certificate.pem for TLS>
+  signkey: <path to key in pem format for Signing>
+  trustca: <path to ca.pem>  root and issuing cert can be found here https://openbanking.atlassian.net/wiki/spaces/DZ/pages/252018873/OB+Root+and+Issuing+Certificates+for+Sandbox
+  clientId: <client id as found on the software statement>
+  scope: ASPSPReadAccess TPPReadAccess AuthoritiesReadAccess
+
+
+
+
+

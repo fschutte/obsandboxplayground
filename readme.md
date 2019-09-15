@@ -28,3 +28,13 @@ To run your application from command line you could do something like this:
 mvn clean spring-boot:run
 ```
 
+The output gives a list of the registered ASPSPs in the sandbox directory:
+
+    1. Ozone Financial Technology Limited
+    2. Open Banking Limited (A)
+    3. AIB Group (UK) plc
+    4. HSBC UK Bank Plc
+    5. Starling Bank Limited
+    6. Barclays Bank UK Plc
+    7. Bank of Scotland PLC
+    ...

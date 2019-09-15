@@ -10,6 +10,8 @@ class Config {
     lateinit var certpath: String
     lateinit var signkey: String
     lateinit var trustca: String
+    lateinit var signkeyId: String
     lateinit var clientId: String
     lateinit var scope: String
+    lateinit var audience: String
 }

@@ -8,8 +8,10 @@ obapi:
   certpath: <path to certificate.pem for TLS>
   signkey: <path to key in pem format for Signing>
   trustca: <path to ca.pem>  root and issuing cert can be found here https://openbanking.atlassian.net/wiki/spaces/DZ/pages/252018873/OB+Root+and+Issuing+Certificates+for+Sandbox
+  signKeyId: <id of signing key>  can  be found on software statement page in OB directory
   clientId: <client id as found on the software statement>
   scope: ASPSPReadAccess TPPReadAccess AuthoritiesReadAccess
+  audience: https://matls-sso.openbankingtest.org.uk/as/token.oauth2
 
 
 

@@ -54,10 +54,8 @@ class ApplicationRunnerBean(val config: Config, val webClientBuilder: WebClient.
     private val clientId: String by lazy { config.clientId }
     private val scope: String by lazy {config.scope }
     private val signKey: PrivateKey by lazy { readPrivateKeyFile(config.signkey) }
-
-    // Key ID heb ik gehaald van OB Directory website onder de software statement
-    // dit is de keyId van de signing certificate
-    private val keyId = "-OJMS-8yaOZvcm0fV_hkrFAEvHA"
+    private val signKeyId: String by lazy {config.signkeyId }
+    private val audience: String by lazy {config.audience }
 
     private val webClient: WebClient by lazy {
         val sslContext = SslContextBuilder.forClient()
@@ -89,7 +87,7 @@ class ApplicationRunnerBean(val config: Config, val webClientBuilder: WebClient.
         val claimsSet = JWTClaimsSet.Builder()
                 .issuer(clientId)    // this is the software statement id (aka client id)
                 .subject(clientId)
-                .audience("https://matls-sso.openbankingtest.org.uk/as/token.oauth2")
+                .audience(audience)
                 .expirationTime(Date(Date().getTime() + 1000 * 60 * 10))
                 .issueTime(Date())
                 .jwtID(UUID.randomUUID().toString())
@@ -104,7 +102,7 @@ class ApplicationRunnerBean(val config: Config, val webClientBuilder: WebClient.
         // Prepare JWS object with simple string as payload
         val jwsObject = JWSObject(
                 JWSHeader.Builder(JWSAlgorithm.RS256)
-                        .keyID(keyId)
+                        .keyID(signKeyId)
                         .type(JOSEObjectType.JWT)
                         .build(),
                 Payload(claimsSet.toJSONObject()))
@@ -137,7 +135,7 @@ class ApplicationRunnerBean(val config: Config, val webClientBuilder: WebClient.
                     val scimObject = objectMapper.treeToValue<ScimOBAccountPaymentServiceProvidersResponse>(json)
 
                     scimObject.resources.forEachIndexed { index, resource ->
-                        println("$index. ${resource.organisation.organisationCommonName}")
+                        println("${index+1}. ${resource.organisation.organisationCommonName}")
                     }
 //                    println("*** ${scimObject.resources[0].organisation.organisationCommonName}")
 
